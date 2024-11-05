@@ -10,6 +10,8 @@ import { AccountUser, User } from '../model/user.model';
 import { UserService } from '../service/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { EditAccountComponent } from './edit/edit.component';
+import { AssignUserToAccountComponent } from './user/assign-user.component';
 
 @Component({
     selector: 'app-account',
@@ -20,7 +22,9 @@ import { FormsModule } from '@angular/forms';
         CommonModule,
         FormsModule,
         AgGridModule,
-        ButtonCellRendererComponent
+        ButtonCellRendererComponent,
+        EditAccountComponent,
+        AssignUserToAccountComponent
     ]
 })
 export class AccountComponent implements OnInit {
@@ -28,10 +32,10 @@ export class AccountComponent implements OnInit {
 
     accounts$: Observable<Account[]>;
     users$: Observable<AccountUser[]>;
-    accountBehaviorSubject = new BehaviorSubject(0);
+    accountBehaviorSubject = new BehaviorSubject<number>(0);
     accountAddAction$ = this.accountBehaviorSubject.asObservable();
-    selectedAccount?: Account = undefined;
-    accountToBeUpdate?: Account = undefined;
+    selectedAccount?: Account;
+    accountToBeUpdate?: Account;
     columnDefs: ColDef[] = [
         {
             field: 'id',
@@ -68,7 +72,7 @@ export class AccountComponent implements OnInit {
 
     constructor(private accountService: AccountService) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.accounts$ = this.accountAddAction$.pipe(
             debounceTime(200),
             switchMap(() => this.accountService.getAccounts())
@@ -82,18 +86,22 @@ export class AccountComponent implements OnInit {
         );
     }
 
-    onUpdate(account: Account) {
-        this.accountBehaviorSubject.next(account?.id);
-        this.selectedAccount = account;
+    onUpdate(account: Account | null): void {
+        if (account) {
+            this.accountBehaviorSubject.next(account.id);
+            this.selectedAccount = account;
+        }
     }
 
-    onSelectionChanged() {
+    onSelectionChanged(): void {
         const selectedRows = this.gridApi.getSelectedRows() as Account[];
-        this.selectedAccount = selectedRows[0];
-        this.accountBehaviorSubject.next(selectedRows[0].id);
+        if (selectedRows.length > 0) {
+            this.selectedAccount = selectedRows[0];
+            this.accountBehaviorSubject.next(selectedRows[0].id);
+        }
     }
 
-    onGridReady(params: GridReadyEvent) {
+    onGridReady(params: GridReadyEvent): void {
         this.gridApi = params.api;
     }
 }
