@@ -11,15 +11,16 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { DropdownModule } from '../dropdown/dropdown.module';
 
 @NgModule({
-  declarations: [AccountComponent, EditAccountComponent, AssignUserToAccountComponent],
   imports: [
     CommonModule,
     FormsModule,
     TypeaheadModule.forRoot(),
     DropdownModule,
     AlertModule.forRoot(),
-    AgGridModule
-  ],
-  exports: [AccountComponent, EditAccountComponent, AssignUserToAccountComponent]
+    AgGridModule,
+    AccountComponent,
+    EditAccountComponent,
+    AssignUserToAccountComponent
+  ]
 })
 export class AccountsModule { }
