@@ -1,15 +1,28 @@
 import { catchError } from 'rxjs/operators';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Account } from 'main/app/model/account.model';
-import { User } from 'main/app/model/user.model';
-import { AccountService } from 'main/app/service/account.service';
-import { UserService } from 'main/app/service/user.service';
+import { Account } from '../../model/account.model';
+import { User } from '../../model/user.model';
+import { AccountService } from '../../service/account.service';
+import { UserService } from '../../service/user.service';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { map, noop, Observable, Observer, of, switchMap, tap } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { DropdownComponent } from '../../dropdown/dropdown.component';
 
 @Component({
     selector: 'app-assign-user',
-    templateUrl: 'assign-user.component.html'
+    templateUrl: 'assign-user.component.html',
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        TypeaheadModule,
+        AlertModule,
+        DropdownComponent
+    ]
 })
 export class AssignUserToAccountComponent implements OnInit {
     @Input() accounts: any = [];
