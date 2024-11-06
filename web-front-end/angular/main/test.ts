@@ -21,7 +21,10 @@ getTestBed().initTestEnvironment(
     {
         teardown: {
             destroyAfterEach: true
-        }
+        },
+        errorOnUnknownElements: true,
+        errorOnUnknownProperties: true,
+        rethrowApplicationErrors: true // Angular 19 change: Ensure errors during ApplicationRef.tick are rethrown
     }
 );
 
