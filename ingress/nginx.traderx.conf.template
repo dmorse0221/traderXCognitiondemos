@@ -10,7 +10,7 @@
         }
 
         location /ng-cli-ws {
-            proxy_pass http://web-front-end-angular:18093/ng-cli-ws;
+            proxy_pass http://web-front-end-react:18094/ng-cli-ws;
             proxy_http_version 1.1;
             proxy_set_header Upgrade ${DOLLAR}http_upgrade;
             proxy_set_header Connection "upgrade";
@@ -56,6 +56,6 @@
             proxy_pass http://trade-processor:18091/;
         }
         location / {
-            proxy_pass http://web-front-end-angular:18093/;
+            proxy_pass http://web-front-end-react:18094/;
         }
     }

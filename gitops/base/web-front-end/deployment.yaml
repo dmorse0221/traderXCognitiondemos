@@ -2,29 +2,29 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: web-front-end-angular
-  name: web-front-end-angular
+    app: web-front-end-react
+  name: web-front-end-react
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web-front-end-angular
+      app: web-front-end-react
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: web-front-end-angular
+        app: web-front-end-react
     spec:
       containers:
-        - image: traderx/web-front-end-angular
+        - image: traderx/web-front-end-react
           imagePullPolicy: IfNotPresent
-          name: web-front-end-angular
+          name: web-front-end-react
           env:
             - name: WEB_FRONT_END_START_MODE
               value: "start-prod"
           ports:
-            - containerPort: 18093
+            - containerPort: 18094
               protocol: TCP
-          workingDir: /web-front-end/angular
+          workingDir: /web-front-end/react
       restartPolicy: Always

@@ -6,7 +6,8 @@ import Select from '@mui/material/Select';
 import { SelectChangeEvent } from '@mui/material';
 import React from 'react';
 import { GetAccounts } from '../hooks';
-import { AccountData, AccountsDropdownProps } from './types';
+import { AccountsDropdownProps } from './types';
+import { AccountData } from '../types';
 
 export const AccountsDropdown = ({handleChange, currentAccount}:AccountsDropdownProps) => {
   const accounts = GetAccounts()

@@ -24,7 +24,6 @@ jobs:
           module-folder: [
             'reference-data',
             'trade-feed',
-            'web-front-end/angular',
             'web-front-end/react']
     steps:
       - name: Checkout
@@ -152,7 +151,6 @@ jobs:
             'trade-feed',
             'position-service',
             'trade-service',
-            'web-front-end/angular',
             'people-service',
             'reference-data']
     steps:

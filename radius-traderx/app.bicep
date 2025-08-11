@@ -206,14 +206,14 @@ resource tradeprocessor 'Applications.Core/containers@2023-10-01-preview' = {
 }
 
 resource webfrontend 'Applications.Core/containers@2023-10-01-preview' = {
-  name: 'web-front-end-angular'
+  name: 'web-front-end-react'
   properties: {
     application: application
     container: {
-      image: 'ghcr.io/finos/traderx/web-front-end-angular:latest'
+      image: 'ghcr.io/finos/traderx/web-front-end-react:latest'
       ports: {
         web: {
-          containerPort: 18093
+          containerPort: 18094
         }
       }
       env: {

@@ -48,7 +48,7 @@ The project consists of multiple moving parts, and you can see how things hang t
 | [position-service](position-service) | java/spring | Position service for looking up positions and trades by the blotter |
 | [trade-service](trade-service) | java/spring | Service for submitting trade/order requests for further processing |
 | [trade-processor](trade-processor) | java/spring | Trade Feed consumer which processes trade/orders |
-| [web-front-end](web-front-end) | html/angular or react | Interactive UI for executing trades and viewing blotter. Note: the AngularJS GUI was an initial contribution and contains account management capabilities. The React GUI was contributed during a hack day and may not work for managing accounts, but it does work for executing trades and viewing the blotter |
+| [web-front-end](web-front-end) | html/react | Interactive UI for executing trades and viewing blotter with full account management capabilities |
 
 ## Installation  
 
@@ -69,7 +69,6 @@ export PEOPLE_SERVICE_PORT=18089
 export POSITION_SERVICE_PORT=18090
 export TRADE_PROCESSOR_SERVICE_PORT=18091
 export TRADING_SERVICE_PORT=18092
-export WEB_SERVICE_ANGULAR_PORT=18093  #Angular
 export WEB_SERVICE_REACT_PORT=18094  #React
 ```
 
