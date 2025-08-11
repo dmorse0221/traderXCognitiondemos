@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AccountData } from "../AccountsDropdown";
+import { AccountData } from "../types";
 import { Environment } from '../env';
 
 export const GetAccounts = () => {

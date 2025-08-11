@@ -4,16 +4,11 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import { SelectChangeEvent } from '@mui/material';
-import { socket } from '../socket';
-import { GetPositions, GetTrades } from '../hooks';
+import { GetPositions, GetTrades, useTradeFeed } from '../hooks';
 import { CreateAccount, CreateAccountUser, CreateTradeButton } from '../ActionButtons';
 import { ColDef } from 'ag-grid-community';
-import { PositionData, TradeData } from './types';
+import { PositionData, TradeData } from '../types';
 import { AccountsDropdown } from '../AccountsDropdown';
-
-const PUBLISH='publish';
-const SUBSCRIBE='subscribe';
-const UNSUBSCRIBE='unsubscribe';
 
 
 
@@ -27,28 +22,31 @@ export const Datatable = () => {
 
 	const positionData = GetPositions(selectedId);
 	const tradeData = GetTrades(selectedId);
+	const { subscribe, unsubscribe } = useTradeFeed();
 
 	const handleChange = useCallback((event:SelectChangeEvent<any>) => {
-		socket.off(PUBLISH);
-		if (selectedId !== 0){
-			socket.emit(UNSUBSCRIBE,`/accounts/${selectedId}/trades`);
-			socket.emit(UNSUBSCRIBE,`/accounts/${selectedId}/positions`);
+		const newAccountId = event.target.value;
+		
+		if (selectedId !== 0) {
+			unsubscribe(`/accounts/${selectedId}/trades`);
+			unsubscribe(`/accounts/${selectedId}/positions`);
 		}
-		setSelectedId(event.target.value);
-		setCurrentAccount(event.target.value);
-		socket.emit(SUBSCRIBE,`/accounts/${event.target.value}/trades`);
-		socket.emit(SUBSCRIBE,`/accounts/${event.target.value}/positions`);
-		socket.on(PUBLISH, (data:any) => {
-			if (data.topic === `/accounts/${event.target.value}/trades`) {
+		
+		setSelectedId(newAccountId);
+		setCurrentAccount(newAccountId);
+		
+		if (newAccountId !== 0) {
+			subscribe(`/accounts/${newAccountId}/trades`, (data: any) => {
 				console.log("INCOMING TRADE DATA: ", data);
-				setTradeRowData((current: TradeData[]) => [...current, data.payload]);
-			}
-			if (data.topic === `/accounts/${event.target.value}/positions`) {
+				setTradeRowData((current: TradeData[]) => [...current, data]);
+			});
+			
+			subscribe(`/accounts/${newAccountId}/positions`, (data: any) => {
 				console.log("INCOMING POSITION DATA: ", data);
-				setPositionRowData((current: PositionData[]) => [...current, data.payload]);
-			}
-		});
-  }, [selectedId])
+				setPositionRowData((current: PositionData[]) => [...current, data]);
+			});
+		}
+  }, [selectedId, subscribe, unsubscribe])
 
 	useEffect(() => {
 			const positionKeys = ['security','quantity','updated'];

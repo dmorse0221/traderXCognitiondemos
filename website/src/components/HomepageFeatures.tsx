@@ -145,7 +145,7 @@ that was presented at the <a href="https://events.linuxfoundation.org/archive/20
 							title: 'Web Front-End',
 							description: (
 								<>
-									Angular-based GUI for executing trades, viewing trades and positions, and managing accounts. This connects
+									React-based GUI for executing trades, viewing trades and positions, and managing accounts. This connects
                                     to all of the REST services mentioned above except for the trade-processor which runs 'headless' and interacts
                                     only with the database and message bus. 
 								</>

@@ -171,17 +171,17 @@ services:
     depends_on:
       - database
       - trade-feed
-  web-front-end-angular:
+  web-front-end-react:
     restart: always
-    image: web-front-end-angular
+    image: web-front-end-react
     build:
-      context: web-front-end/angular
+      context: web-front-end/react
       dockerfile: Dockerfile
-    working_dir: /web-front-end/angular
+    working_dir: /web-front-end/react
     expose:
-      - 18093
+      - 18094
     ports:
-      - 18093:18093
+      - 18094:18094
     volumes:
       # Mount the root folder that contains .git
       - .:/workspace:cached
@@ -213,7 +213,7 @@ services:
       - position-service
       - trade-service
       - trade-processor
-      - web-front-end-angular
+      - web-front-end-react
 
 networks:
   localnet:

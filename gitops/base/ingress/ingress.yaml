@@ -28,7 +28,7 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: web-front-end-angular
+              name: web-front-end-react
               port:
                 number: 8080
         - path: /people-service(/|$)(.*)
@@ -84,6 +84,6 @@ spec:
           pathType: Prefix
           backend:
             service:
-              name: web-front-end-angular
+              name: web-front-end-react
               port:
                 number: 8080

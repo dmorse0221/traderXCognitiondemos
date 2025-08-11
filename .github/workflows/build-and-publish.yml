@@ -39,8 +39,8 @@ jobs:
             image: traderx/trade-processor
           - directory: trade-service/
             image: traderx/trade-service
-          - directory: web-front-end/angular/
-            image: traderx/web-front-end-angular
+          - directory: web-front-end/react/
+            image: traderx/web-front-end-react
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

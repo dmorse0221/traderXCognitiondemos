@@ -44,5 +44,5 @@ You can find the coordinates of the codebase here. Their relationship is explain
 
 ### `web-front-end`
 
-* Typescript / Angular / Bootstrap
+* Typescript / React / Bootstrap
 * [Source Code](../web-front-end)
