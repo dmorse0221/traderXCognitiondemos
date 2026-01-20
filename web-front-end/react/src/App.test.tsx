@@ -1,9 +1,25 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import { BrowserRouter } from 'react-router-dom';
+import { Header } from './components/Header';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App Integration', () => {
+  it('renders header with navigation', () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
+    expect(screen.getByText('FINOS | TraderX Sample Application')).toBeInTheDocument();
+  });
+
+  it('renders Trade and Account navigation links', () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
+    expect(screen.getByText('Trade')).toBeInTheDocument();
+    expect(screen.getByText('Account')).toBeInTheDocument();
+  });
 });

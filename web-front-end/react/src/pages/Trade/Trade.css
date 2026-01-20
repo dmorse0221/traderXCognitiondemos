@@ -1,0 +1,33 @@
+.trade-container {
+  padding: 2rem;
+}
+
+.trade-ops {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.trade-filter {
+  min-width: 200px;
+}
+
+.trade-ticket {
+  display: flex;
+  flex-direction: column;
+}
+
+.trade-blotter {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.trade-blotter-items {
+  flex: 1;
+}
+
+.position-blotter-items {
+  flex: 1;
+}
